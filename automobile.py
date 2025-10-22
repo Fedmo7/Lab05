@@ -1,3 +1,4 @@
+
 class Automobile:
     def __init__(self, codice, marca, modello, anno, posti, disponibile=True):
         self.codice = codice
@@ -14,3 +15,4 @@ class Automobile:
     def __repr__(self):
         stato = "Disponibile" if self.disponibile else "Noleggiata"
         return f"{self.codice} | {self.marca} {self.modello} ({self.anno}) | {self.posti} posti | {stato}"
+
