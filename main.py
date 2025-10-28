@@ -1,3 +1,5 @@
+from logging import exception
+
 import flet as ft
 
 import automobile
@@ -74,21 +76,42 @@ def main(page: ft.Page):
     def conferma_auto(e):
 
         try:
-            auto=autonoleggio.aggiungi_automobile(marca=input_marca.value[5:],
+
+            if int(input_anno.value[4:])>=1950 and int(input_anno.value[4:])<=2025 and int(txtOut.value)>=1:
+
+                auto=autonoleggio.aggiungi_automobile(marca=input_marca.value[5:],
                                          modello=input_modello.value[7:],
                                          anno=input_anno.value[4:],
-                                         num_posti=txtOut.value,)
+                                         num_posti=txtOut.value)
 
-            aggiorna_lista_auto()
 
-            input_marca.value="Marca"
-            input_anno.value="Anno"
-            input_modello.value="Modello"
-            txtOut.value=(0)
-            page.update()
+                aggiorna_lista_auto()
+
+
+                input_marca.value="Marca"
+                input_anno.value="Anno"
+                input_modello.value="Modello"
+                txtOut.value=(0)
+                page.update()
+
+
+            else:
+                input_marca.value = "Marca"
+                input_anno.value = "Anno"
+                input_modello.value = "Modello"
+                txtOut.value = (0)
+                page.update()
+                alert.show_alert(f'❌Errore:Inserisci valori numerici validi per anno e posti')
 
         except Exception as e:
-            alert.show_alert(f'Errore:{e}')
+            input_marca.value = "Marca"
+            input_anno.value = "Anno"
+            input_modello.value = "Modello"
+            txtOut.value = (0)
+            page.update()
+            alert.show_alert(f'❌Errore:{e}')
+
+
 
     # Handlers per la gestione dei bottoni utili all'inserimento di una nuova auto
     # TODO
